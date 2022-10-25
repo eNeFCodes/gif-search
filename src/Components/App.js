@@ -14,11 +14,11 @@ function App() {
 
   const performSearch = (value) => setQuery(value);
 
-  const { API_KEY } = useContext(EnvironmentContext);
+  const { API_KEY } = useContext(EnvironmentContext) || '';
 
   useEffect(() => {
     // Be sure to add your API key
-    axios(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=${API_KEY}`)
+    axios(`https://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=${API_KEY}`)
       .then(response => setData(response.data.data))
       .catch(error => console.log('Error fetching and parsing data', error))
       .finally(() => setIsLoading(false));
