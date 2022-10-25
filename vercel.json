@@ -1,43 +1,45 @@
 {
-    "version": 2,
-    "name": "create-react-app",
-    "builds": [
+    "headers": [
         {
-            "src": "package.json",
-            "use": "@now/static-build"
-        }
-    ],
-    "routes": [
-        {
-            "src": "^/static/(.*)",
-            "dest": "/static/$1"
+            "source": "/service-worker.js",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=0, must-revalidate"
+                }
+            ]
         },
         {
-            "src": "^/favicon.ico",
-            "dest": "/favicon.ico"
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "X-Frame-Options",
+                    "value": "DENY"
+                },
+                {
+                    "key": "X-XSS-Protection",
+                    "value": "1; mode=block"
+                }
+            ]
         },
         {
-            "src": "^/asset-manifest.json",
-            "dest": "/asset-manifest.json"
-        },
-        {
-            "src": "^/manifest.json",
-            "dest": "/manifest.json"
-        },
-        {
-            "src": "^/service-worker.js",
-            "headers": {
-                "cache-control": "s-maxage=0"
-            },
-            "dest": "/service-worker.js"
-        },
-        {
-            "src": "^/precache-manifest.(.*)",
-            "dest": "/precache-manifest.$1"
-        },
-        {
-            "src": "^/(.*)",
-            "dest": "/index.html"
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "authorized"
+                }
+            ],
+            "headers": [
+                {
+                    "key": "x-authorized",
+                    "value": "true"
+                }
+            ]
         }
     ]
 }
