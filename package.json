@@ -2,7 +2,7 @@
   "name": "gif-search",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://eNeFCodes.github.io/gif-search",
+  "homepage": "https://eNeFCodes.github.io/gif-search",
   "dependencies": {
     "axios": "^0.19.2",
     "react": "^16.13.1",
